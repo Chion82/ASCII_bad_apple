@@ -1,8 +1,10 @@
 from PIL import Image
 
+video_length = 218
+
 ASCII_CHARS = '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`\'. '
 
-def scale_image(image, new_width=100, new_height=0):
+def scale_image(image, new_width=100, new_height=30):
     """Resizes an image preserving the aspect ratio.
     """
     (original_width, original_height) = image.size
@@ -29,8 +31,8 @@ def map_pixels_to_ascii_chars(image, range_width=3.69):
 
     return "".join(pixels_to_chars)
 
-def convert_image_to_ascii(image, new_width=100):
-    image = scale_image(image, 100, 30)
+def convert_image_to_ascii(image, new_width=100, new_height=30):
+    image = scale_image(image, new_width, new_height)
     image = convert_to_grayscale(image)
 
     pixels_to_chars = map_pixels_to_ascii_chars(image)
@@ -49,7 +51,6 @@ def handle_image_conversion(image_filepath):
         print "Unable to open image file {image_filepath}.".format(image_filepath=image_filepath)
         print e
         return
-
     image_ascii = convert_image_to_ascii(image)
     return image_ascii
 
@@ -57,10 +58,9 @@ if __name__=='__main__':
     import os
     import time 
     import cv2
-    vidcap = cv2.VideoCapture('test.mp4')
+    vidcap = cv2.VideoCapture('video.mp4')
     time_count = 0
     frames = []
-    video_length = 218
     while time_count <= video_length*1000:
         print('Generating ASCII frame at ' + str(time_count))
         vidcap.set(0, time_count)
@@ -73,18 +73,4 @@ if __name__=='__main__':
     f = open('play.txt', 'w')
     f.write('SPLIT'.join(frames))
     f.close()
-
-#    os.system('mplayer -vo null -vc null test.mp4 &')
-#    for frame in frames:
-#        os.system('clear')
-#        print(frame)
-#        time.sleep(0.1)
-#    vidcap.set(0, 20000)
-#    success, image = vidcap.read()
-#    if success:
-#        os.system('clear')
-#        cv2.imwrite('output.jpg', image)
-#        handle_image_conversion('output.jpg')
-
-
 
