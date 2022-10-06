@@ -1,10 +1,15 @@
-import time, os
+import time
+import os
 
 if __name__ == '__main__':
-	f = open('play.txt', 'r')
-	frame_raw = f.read()
-	frame_raw = frame_raw.replace('.', ' ')
-	f.close()
+	with open('play.txt', 'r') as f:
+		frame_raw = f.read()
+		frame_raw = frame_raw.replace('.', ' ')
+		f.close()
+	try:
+		f.close()
+	except:
+		exit()
 	frames = frame_raw.split('SPLIT')
 	os.system('mplayer -vo null -vc null video.mp4 &')
 	#os.system('mplayer test.mp4 &')
