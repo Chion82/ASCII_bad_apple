@@ -39,7 +39,7 @@ def convert_image_to_ascii(image, new_width=100, new_height=30):
     len_pixels_to_chars = len(pixels_to_chars)
 
     image_ascii = [pixels_to_chars[index: index + new_width] for index in
-            xrange(0, len_pixels_to_chars, new_width)]
+            range(0, len_pixels_to_chars, new_width)]
 
     return "\n".join(image_ascii)
 
