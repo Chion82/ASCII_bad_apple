@@ -47,9 +47,9 @@ def handle_image_conversion(image_filepath):
     image = None
     try:
         image = Image.open(image_filepath)
-    except Exception, e:
-        print "Unable to open image file {image_filepath}.".format(image_filepath=image_filepath)
-        print e
+    except Exception as e:
+        print("Unable to open image file {image_filepath}.".format(image_filepath=image_filepath))
+        print(e)
         return
     image_ascii = convert_image_to_ascii(image)
     return image_ascii
