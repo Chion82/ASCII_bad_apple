@@ -3,7 +3,7 @@
 ##Play Bad Apple!
 
 ```
-$ python run.py
+$ python3 run.py
 ```
 
 ##Dependencies
